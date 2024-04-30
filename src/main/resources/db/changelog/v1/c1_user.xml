@@ -7,16 +7,16 @@
 
     <changeSet id="04281859" author="rina">
 
-        <createSequence
-                sequenceName="credentials_seq"
-                incrementBy="1"
-                minValue="1"
-                dataType="bigint"
-                startValue="1"/>
+<!--        <createSequence-->
+<!--                sequenceName="credentials_seq"-->
+<!--                incrementBy="1"-->
+<!--                minValue="1"-->
+<!--                dataType="bigint"-->
+<!--                startValue="1"/>-->
 
         <createTable tableName="user_credentials">
-            <column name="id" type="bigint" defaultValueComputed="nextval('credentials_seq')">
-                <constraints primaryKey="true" foreignKeyName="user_credentials_fk"/>
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" foreignKeyName="user_credentials_fk"/>
             </column>
             <column name="username" type="varchar(30)"/>
             <column name="password" type="varchar(255)"/>
@@ -26,16 +26,16 @@
             <column name="updated" type="datetime" />
         </createTable>
 
-        <createSequence
-                sequenceName="info_seq"
-                incrementBy="1"
-                minValue="1"
-                dataType="bigint"
-                startValue="1"/>
+<!--        <createSequence-->
+<!--                sequenceName="info_seq"-->
+<!--                incrementBy="1"-->
+<!--                minValue="1"-->
+<!--                dataType="bigint"-->
+<!--                startValue="1"/>-->
 
         <createTable tableName="user_info">
-            <column name="id" type="bigint" defaultValueComputed="nextval('info_seq')">
-                <constraints primaryKey="true" foreignKeyName="user_fk"/>
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" foreignKeyName="user_fk"/>
             </column>
             <column name="first_name" type="varchar(30)"/>
             <column name="second_name" type="varchar(30)"/>
