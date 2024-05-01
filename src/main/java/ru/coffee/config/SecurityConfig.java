@@ -19,8 +19,9 @@ public class SecurityConfig {
                 .disable()
                 .authorizeHttpRequests(
                         (requests) -> requests
-                        .requestMatchers(OPTIONS).permitAll() // allow CORS option calls for Swagger UI
-                        .requestMatchers("/v1/**").permitAll()
+                        .requestMatchers(OPTIONS).permitAll()
+                        .requestMatchers("/v1/registration/**").permitAll()
+                        .requestMatchers("/v1/authorization/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic();

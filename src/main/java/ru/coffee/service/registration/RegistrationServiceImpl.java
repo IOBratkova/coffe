@@ -1,4 +1,4 @@
-package ru.coffee.service;
+package ru.coffee.service.registration;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.coffee.entity.User;
 import ru.coffee.entity.UserCredential;
 import ru.coffee.exceptions.registration.EmailIsAlreadyExistsException;
-import ru.coffee.exceptions.registration.UsernamelIsAlreadyExistsException;
+import ru.coffee.exceptions.registration.UsernameIsAlreadyExistsException;
 import ru.coffee.repository.UserCredentialRepository;
 import ru.coffee.repository.UserRepository;
 
@@ -19,12 +19,12 @@ public class RegistrationServiceImpl implements RegistrationService {
     private UserRepository userRepository;
 
     @Override
-    public Long registration(UserCredential userCredential) throws EmailIsAlreadyExistsException, UsernamelIsAlreadyExistsException {
+    public Long registration(UserCredential userCredential) throws EmailIsAlreadyExistsException, UsernameIsAlreadyExistsException {
         if (credentialRepository.existsByEmail(userCredential.getEmail())) {
-            throw new EmailIsAlreadyExistsException();
+            throw new EmailIsAlreadyExistsException("Пользователь с указанным email уже существует");
         }
         if (credentialRepository.existsByUsername(userCredential.getUsername())) {
-            throw new UsernamelIsAlreadyExistsException();
+            throw new UsernameIsAlreadyExistsException("Пользователь с указанным username уже существует");
         }
         userCredential.setPassword(passwordEncoder.encode(userCredential.getPassword()));
         User user = new User(null, null, null, "-", "-", "-", userCredential);
